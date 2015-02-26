@@ -37,9 +37,9 @@
     }
 }
 
-@include gridify(2, 400);
-@include gridify(4, 600);
-
+@include gridify(2, 400); // .grid-2-400
+@include gridify(4, 600); // .grid-4-600
+@include gridify(3, 600); // .grid-3-600
 /**
  * PACE (automatic pre-loader thingy)
  */
