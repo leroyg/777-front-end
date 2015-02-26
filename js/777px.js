@@ -67,6 +67,7 @@
                     self.refs.img.getDOMNode().classList.remove("loaded")
                 }
             }
+            this.onscroll = _.debounce(this.onscroll, 16)
             window.addEventListener('scroll', this.onscroll)
         },
         componentWillUnmount: function(){
