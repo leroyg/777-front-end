@@ -37,9 +37,9 @@
     }
 }
 
-@include gridify(2, 400); // .grid-2-400
-@include gridify(4, 600); // .grid-4-600
-@include gridify(3, 600); // .grid-3-600
+@include gridify(2, 400, 0); // .grid-2-400
+@include gridify(4, 600, 0); // .grid-4-600
+@include gridify(3, 600, 0); // .grid-3-600
 /**
  * PACE (automatic pre-loader thingy)
  */
@@ -77,4 +77,12 @@ img {max-width:100%;}
 
 body {
     transition: opacity .25s ease;
+}
+
+img.dynamic {
+    opacity: 0;
+    transition: all .25s ease;
+    &.loaded {
+        opacity: 1;
+    }
 }

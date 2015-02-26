@@ -837,15 +837,15 @@ abbr[title]:hover {
 
 @media only screen and (min-width: 400px) {
   .grid-2-400 > * {
-    width: 48%; } }
+    width: 50%; } }
 
 @media only screen and (min-width: 600px) {
   .grid-4-600 > * {
-    width: 23%; } }
+    width: 25%; } }
 
 @media only screen and (min-width: 600px) {
   .grid-3-600 > * {
-    width: 31.33333%; } }
+    width: 33.33333%; } }
 
 /**
  * PACE (automatic pre-loader thingy)
@@ -885,4 +885,11 @@ img {
 body {
   -webkit-transition: opacity .25s ease;
           transition: opacity .25s ease; }
+
+img.dynamic {
+  opacity: 0;
+  -webkit-transition: all .25s ease;
+          transition: all .25s ease; }
+  img.dynamic.loaded {
+    opacity: 1; }
 
