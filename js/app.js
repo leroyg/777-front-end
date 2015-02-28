@@ -15,6 +15,7 @@ function app(){
         //js
         {url: "./bower_components/jquery/dist/jquery.min.js"},
         {url: "./bower_components/lodash/lodash.min.js"},
+        // {url: "./bower_components/materialize/dist/js/materialize.min.js"},
 
         // when using just Backbone, use this line
         {url: "./bower_components/backbone/backbone.js"},
@@ -22,7 +23,7 @@ function app(){
         // {url: "./bower_components/parse-js-sdk/lib/parse.min.js"},
 
         // when using React (and the plugin JSnoX), uncomment the following two lines
-        {url: "./bower_components/react/react.min.js"},
+        {url: "./bower_components/react/react.js"},
         {url: "./bower_components/jsnox/index.js"},
 
         // other stuff

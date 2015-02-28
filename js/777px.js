@@ -14,7 +14,7 @@
         home: function(){
             // var m = new Backbone.Photo({ id: "c91c37982fb792ea9ea714562ab0e1e9"});
             var c = new Backbone.Gallery();
-            var coffee = d(CoffeeGoggles, {collection: c})
+            var coffee = d(_777, {collection: c})
             React.render(coffee, this.container)
             c.fetch()
 
@@ -47,7 +47,7 @@
     })
 
     var PhotoView = React.createClass({
-        className: "Photo",
+        displayName: "Photo",
         getDefaultProps: function(){
             return {}
         },
@@ -75,7 +75,7 @@
         },
         _getScrollTop: function(loaded){
             var a = this.refs.img.getDOMNode(),
-                _y = a.offsetTop,
+                _y = a.getBoundingClientRect().top + window.scrollY,
                 b = a.offsetHeight - 100,
                 h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
             return (loaded || this.state.loaded) && ((_y + b > window.scrollY) && (_y + 100 < window.scrollY + h))
@@ -86,13 +86,20 @@
         },
         render: function(){
             var model = this.props.model;
-            return d("div", [
-                d("img.dynamic@img", {src: model && model.get("large_photo_url"), onLoad: this._loaded} ),
+            return d("div.col.s6.m6.l6", [
+                d("div.card", [
+                    d("div.card-image", [
+                        d("img.dynamic@img", {src: model && model.get("large_photo_url"), onLoad: this._loaded} ),
+                        d("span.card-title", model && model.get("name"))
+                    ]),
+                    d("div.card-content", ["Created on:", model && new Date(model.get("created_at")).toDateString()].join(" ") )
+                ])
             ])
         }
     })
 
-    var CoffeeGoggles = React.createClass({
+    var PhotoGrid = React.createClass({
+        displayName: "PhotoGrid",
         getInitialState: function(){
             return {}
         },
@@ -110,18 +117,42 @@
             var arr = this.props.collection.models,
                 arr2 = [],
                 i = 0;
+
             // duplicate tenfold for scrolling
             while(i < 10){
                 arr2.push.apply(arr2, arr)
                 i++;
             }
 
+            return d('div.row',
+                arr2.map((function(model){
+                    return d(PhotoView, { model: model, key: model.id+Math.random() })
+                }).bind(this))
+            )
+        }
+    })
+
+    var Menu = React.createClass({
+        displayName: "Menu",
+        render: function(){
+            return d("nav", [
+                d("div.nav-wrapper", [
+                    d("a.brand-logo", "777px"),
+                    d("ul#nav-mobile.right.hide-on-med-and-down", [
+                        d("li", [
+                            d("a", "Home")
+                        ])
+                    ])
+                ])
+            ])
+        }
+    })
+
+    var _777 = React.createClass({
+        render:function(){
             return d('div', [
-                d('div.grid.grid-3-600.grid-2-400',
-                    arr2.map((function(model){
-                        return d(PhotoView, { model: model, key: model.id+Math.random() })
-                    }).bind(this))
-                ),
+                d(Menu),
+                d(PhotoGrid, this.props)
             ])
         }
     })
